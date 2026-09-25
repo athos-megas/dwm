@@ -31,6 +31,7 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 1,       0,           -1 },
 	{ "qimgv",    NULL,       NULL,       0,            1,           -1 },
+	{ "mpv",      NULL,       NULL,       0,            1,           -1 },
 };
 
 /* layout(s) */
@@ -46,6 +47,8 @@ static const Layout layouts[] = {
 	{ "󰖲",      NULL },    /* no layout function means floating behavior */
 	{ "󰊓",      monocle },
 };
+
+#include <X11/XF86keysym.h>
 
 /* key definitions */
 #define MODKEY Mod4Mask
@@ -64,6 +67,11 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char *screenshot_full[] = { "scrot", "/home/athos/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png", NULL };
 static const char *screenshot_select[] = { "scrot", "-s", "/home/athos/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png", NULL };
+static const char *cmd_firefox[] = { "firefox", NULL };
+static const char *upvol[]   = { "amixer", "sset", "Master", "5%+", "unmute", NULL };
+static const char *downvol[] = { "amixer", "sset", "Master", "5%-", "unmute", NULL };
+static const char *mutevol[] = { "amixer", "sset", "Master", "toggle", NULL };
+
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -95,6 +103,10 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
 	{ MODKEY,                       XK_s,      spawn,          {.v = screenshot_select } },
 	{ MODKEY|ShiftMask,		XK_s,      spawn,          {.v = screenshot_full } },
+	{ MODKEY,			XK_w,	   spawn,          {.v = cmd_firefox } },
+	{ 0,                 XF86XK_AudioRaiseVolume, spawn,      {.v = upvol} },
+        { 0,                 XF86XK_AudioLowerVolume, spawn,      {.v = downvol} },
+        { 0,                 XF86XK_AudioMute,        spawn,      {.v = mutevol} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
