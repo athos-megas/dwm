@@ -1,0 +1,33 @@
+STARRED PACKAGES ARE OPTIONAL AND SPECIFIC FOR MY SETUP
+
+NetworkManager
+base-devel
+base-system
+chrony
+dbus
+feh
+firefox*
+fontconfig-devel
+freetype-devel
+gcc
+git
+libX11-devel
+libXft-devel
+libXinerama-devel
+lvm2
+make
+mdadm
+mpv*
+qimgv*
+redshift*
+scrot*
+slstatus - this is configured separately but very nice to have for dwm
+ssr
+tmux*
+tree*
+vim*
+xinit
+xorg
+xtools
+
+JetBrainsMono Nerd Font
