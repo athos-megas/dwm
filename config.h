@@ -20,7 +20,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1", "2", "3", "4", "5" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -29,7 +29,8 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Firefox",  NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "qimgv",    NULL,       NULL,       0,            1,           -1 },
 };
 
 /* layout(s) */
@@ -41,9 +42,9 @@ static const int refreshrate = 120;  /* refresh rate (per second) for client mov
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+	{ "󱇙",      tile },    /* first entry is default */
+	{ "󰖲",      NULL },    /* no layout function means floating behavior */
+	{ "󰊓",      monocle },
 };
 
 /* key definitions */
@@ -62,6 +63,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *screenshot_full[] = { "scrot", "/home/athos/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png", NULL };
+static const char *screenshot_select[] = { "scrot", "-s", "/home/athos/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -91,7 +93,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
-	{ MODKEY,                       XK_s,      spawn,          {.v = screenshot_full } },
+	{ MODKEY,                       XK_s,      spawn,          {.v = screenshot_select } },
+	{ MODKEY|ShiftMask,		XK_s,      spawn,          {.v = screenshot_full } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
